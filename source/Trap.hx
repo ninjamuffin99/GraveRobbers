@@ -1,19 +1,23 @@
 package;
+
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.FlxTimer;
+import flixel.FlxTilemap;
+import flixel.FlxPoint;
 	
 class Trap extends FlxSprite
 {
 	static public var changed:Boolean;
 	
 	public var key:String;
-	public var activeTime:Number;
-	public var reloadTime:Number;
+	public var activeTime:Float;
+	public var reloadTime:Float;
 	
-	protected var _tile:FlxPoint;
-	protected var _map:FlxTilemap;
-	protected var _activeTimer:FlxTimer;
-	protected var _reloadTimer:FlxTimer;
+	private var _tile:FlxPoint;
+	private var _map:FlxTilemap;
+	private var _activeTimer:FlxTimer;
+	private var _reloadTimer:FlxTimer;
 	
 	public function Trap(X:Number,Y:Number,Key:String)
 	{

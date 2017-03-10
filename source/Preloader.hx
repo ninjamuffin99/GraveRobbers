@@ -1,13 +1,12 @@
-package
-{
-	import org.flixel.system.FlxPreloader;
+package;
 
-	public class Preloader extends FlxPreloader
+import flixel.system.FlxPreloader;
+
+class Preloader extends FlxPreloader
+{
+	public function Preloader()
 	{
-		public function Preloader()
-		{
-			className = "GraveRobbers";
-			super();
-		}
+		className = "GraveRobbers";
+		super();
 	}
 }

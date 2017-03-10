@@ -1,26 +1,26 @@
-package
+package;
+
+import flixel.FlxSprite;
+import flixel.FlxG;
+
+class Treasure extends FlxSprite
 {
-	import org.flixel.*;
+	[Embed(source="data/treasure.png")] protected var ImgTreasure:Class;
 	
-	public class Treasure extends FlxSprite
+	public function Treasure()
 	{
-		[Embed(source="data/treasure.png")] protected var ImgTreasure:Class;
-		
-		public function Treasure()
+		super(Robber.goal.x - 32,Robber.goal.y + 16 - 59);
+		loadGraphic(ImgTreasure,true,false,64,59);
+		frame = 0;
+	}
+	
+	override public function hurt(Damage:Number):Void
+	{
+		if(frame == 4)
 		{
-			super(Robber.goal.x - 32,Robber.goal.y + 16 - 59);
-			loadGraphic(ImgTreasure,true,false,64,59);
-			frame = 0;
+			exists = false;
+			(FlxG.state as PlayState).gameOver();
 		}
-		
-		override public function hurt(Damage:Number):void
-		{
-			if(frame == 4)
-			{
-				exists = false;
-				(FlxG.state as PlayState).gameOver();
-			}
-			frame = frame + Damage;
-		}
+		frame = frame + Damage;
 	}
 }
