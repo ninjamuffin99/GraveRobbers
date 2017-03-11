@@ -4,11 +4,11 @@ import flixel.FlxState;
 
 class PlayState extends FlxState
 {
-	[Embed(source="data/map.png")] protected var ImgMap:Class;
-	[Embed(source="data/temp_tiles.png")] protected var ImgTempTiles:Class; //not actually displayed
-	[Embed(source="data/bg.png")] protected var ImgBG:Class;
-	[Embed(source="data/fg.png")] protected var ImgFG:Class;
-	[Embed(source="data/skull.png")] protected var ImgSkull:Class;
+	[Embed(source="data/map.png")] private var ImgMap:Class;
+	[Embed(source="data/temp_tiles.png")] private var ImgTempTiles:Class; //not actually displayed
+	[Embed(source="data/bg.png")] private var ImgBG:Class;
+	[Embed(source="data/fg.png")] private var ImgFG:Class;
+	[Embed(source="data/skull.png")] private var ImgSkull:Class;
 	
 	public var map:FlxTilemap;
 	
@@ -36,7 +36,7 @@ class PlayState extends FlxState
 	public var delay:FlxTimer;
 	public var delay2:FlxTimer;
 	
-	override public function create():void
+	override public function create():Void
 	{
 		FlxG.camera.flash(0xff000000);
 		
@@ -111,7 +111,7 @@ class PlayState extends FlxState
 			//FlxG.visualDebug = true;
 	}
 	
-	override public function destroy():void
+	override public function destroy():Void
 	{
 		map = null;
 		crushers = null;
@@ -126,7 +126,7 @@ class PlayState extends FlxState
 		super.destroy();
 	}
 	
-	override public function update():void
+	override public function update():Void
 	{
 		if(gameOverDisplay.visible)
 		{
@@ -153,7 +153,7 @@ class PlayState extends FlxState
 		soulDisplay.text = souls.toString();
 	}
 	
-	public function onTrap(Victim:Robber,Hazard:FlxSprite):void
+	public function onTrap(Victim:Robber,Hazard:FlxSprite):Void
 	{
 		if(Hazard is FloodTrap)
 		{
@@ -203,7 +203,7 @@ class PlayState extends FlxState
 			Victim.kill();
 	}
 	
-	public function onTreasure(Victor:Robber,Bling:Treasure):void
+	public function onTreasure(Victor:Robber,Bling:Treasure):Void
 	{
 		if(Victor.pathSpeed == 0)
 			return;
@@ -223,7 +223,7 @@ class PlayState extends FlxState
 		return traps;
 	}
 	
-	public function gameOver():void
+	public function gameOver():Void
 	{
 		gameOverDisplay.alpha = 0;
 		gameOverDisplay.visible = true;
@@ -231,12 +231,12 @@ class PlayState extends FlxState
 		delay2.stop();
 	}
 	
-	public function onFade():void
+	public function onFade():Void
 	{
 		FlxG.resetState();
 	}
 	
-	public function onDelay(Timer:FlxTimer=null):void
+	public function onDelay(Timer:FlxTimer=null):Void
 	{
 		(robbers.recycle(Robber) as Robber).reset(0,0);
 		if(delay.loopsLeft == 0)
@@ -248,7 +248,7 @@ class PlayState extends FlxState
 		}
 	}
 	
-	public function onDelay2(Timer:FlxTimer=null):void
+	public function onDelay2(Timer:FlxTimer=null):Void
 	{
 		sequence++;
 		delay.time -= 0.05;
