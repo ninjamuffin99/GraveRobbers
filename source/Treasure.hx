@@ -5,7 +5,7 @@ import flixel.FlxG;
 
 class Treasure extends FlxSprite
 {
-	[Embed(source="data/treasure.png")] protected var ImgTreasure:Class;
+	//Embed(source="data/treasure.png")] protected var ImgTreasure:Class;
 	
 	public function Treasure()
 	{
@@ -14,12 +14,12 @@ class Treasure extends FlxSprite
 		frame = 0;
 	}
 	
-	override public function hurt(Damage:Number):Void
+	override public function hurt(Damage:Float):Void
 	{
 		if(frame == 4)
 		{
 			exists = false;
-			(FlxG.state as PlayState).gameOver();
+			(FlxG.state = PlayState).gameOver();
 		}
 		frame = frame + Damage;
 	}

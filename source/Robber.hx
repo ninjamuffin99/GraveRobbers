@@ -1,21 +1,21 @@
 package;
 
-import flixel.FlxTilemap;
 import flixel.FlxPoint;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxTimer;
+import flixel.tile.FlxTilemap;
 
 
 class Robber extends FlxSprite
 {
-	[Embed(source="data/dude.png")] protected var ImgDude:Class;
+	//[Embed(source="data/dude.png")] protected var ImgDude:Class;
 	
-	public static var changeTracker:uint;
+	public static var changeTracker:UInt;
 	public static var goal:FlxPoint;
 	
 	private var _map:FlxTilemap;
-	private var _localTracker:uint;
+	private var _localTracker:UInt;
 	private var _lastY:Float;
 	private var _speed:Float;
 	
@@ -31,7 +31,7 @@ class Robber extends FlxSprite
 		height = 20;
 		offset.x = 2;
 		offset.y = 4;
-		_map = (FlxG.state as PlayState).map;
+		_map = (FlxG.state = PlayState).map;
 		_localTracker = 0;
 		_lastY = y;
 		_speed = 50;
@@ -101,7 +101,7 @@ class Robber extends FlxSprite
 		}
 		
 		//falling and jumping behaviors
-		if(_pathMode == uint(PATH_FORWARD|PATH_HORIZONTAL_ONLY))
+		if(_pathMode == UInt(PATH_FORWARD|PATH_HORIZONTAL_ONLY))
 		{
 			if(isTouching(FLOOR))
 			{
@@ -179,7 +179,7 @@ class Robber extends FlxSprite
 		angle = 0;
 		angularVelocity = 0;
 		drag.x = 200;
-		(FlxG.state as PlayState).souls++;
+		(FlxG.state = PlayState).souls++;
 	}
 	
 	override public function reset(X:Number,Y:Number):Void

@@ -1,14 +1,23 @@
 package;
 
+import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.group.FlxGroup;
+import flixel.math.FlxPoint;
+import flixel.text.FlxText;
+import flixel.tile.FlxTilemap;
+import flixel.util.FlxTimer;
 
 class PlayState extends FlxState
 {
+	/*
 	[Embed(source="data/map.png")] private var ImgMap:Class;
 	[Embed(source="data/temp_tiles.png")] private var ImgTempTiles:Class; //not actually displayed
 	[Embed(source="data/bg.png")] private var ImgBG:Class;
 	[Embed(source="data/fg.png")] private var ImgFG:Class;
 	[Embed(source="data/skull.png")] private var ImgSkull:Class;
+	*/
 	
 	public var map:FlxTilemap;
 	
@@ -28,11 +37,11 @@ class PlayState extends FlxState
 	
 	public var robbers:FlxGroup;
 	
-	public var souls:Number;
+	public var souls:Float;
 	public var soulDisplay:FlxText;
 	public var gameOverDisplay:FlxText;
 	
-	public var sequence:uint;
+	public var sequence:UInt;
 	public var delay:FlxTimer;
 	public var delay2:FlxTimer;
 	
@@ -43,13 +52,13 @@ class PlayState extends FlxState
 		add(new FlxSprite(0,0,ImgBG));
 		
 		//Processing the map data to get trap locations before making a simple collision/pathfinding hull		
-		var solidColor:uint = 0xffffffff;
+		var solidColor:UInt = 0xffffffff;
 		//var openColor:uint = 0xff000000;
-		var crusherColor:uint = 0xffff0000;
-		var flameColor:uint = 0xffffd400;
-		var arrowColor:uint = 0xffff00f2;
-		var trapColor:uint = 0xff15ff00;
-		var floodColor:uint = 0xff2659ff;
+		var crusherColor:UInt = 0xffff0000;
+		var flameColor:UInt = 0xffffd400;
+		var arrowColor:UInt = 0xffff00f2;
+		var trapColor:UInt = 0xff15ff00;
+		var floodColor:UInt = 0xff2659ff;
 		var mapSprite:FlxSprite = new FlxSprite(0,0,ImgMap);
 		var crusherLocations:Array = mapSprite.replaceColor(crusherColor,solidColor,true);
 		var flameLocations:Array = mapSprite.replaceColor(flameColor,solidColor,true);
@@ -71,9 +80,9 @@ class PlayState extends FlxState
 		
 		Trap.changed = false;
 		crushers = makeTraps(Crusher,crusherLocations,["E","F","K","X"]);
-		flames = add(new FlxGroup()) as FlxGroup;
+		flames = add(new FlxGroup());// as FlxGroup;
 		flameTraps = makeTraps(FlameTrap,flameLocations,["U","D"]);
-		arrows = add(new FlxGroup()) as FlxGroup;
+		arrows = add(new FlxGroup());// as FlxGroup;
 		arrowTraps = makeTraps(ArrowTrap,arrowLocations,["R","I","V","N","PERIOD"]);
 		trapDoors = makeTraps(TrapDoor,trapLocations,["J","L","C","COMMA","Z"]);
 		floodTraps = makeTraps(FloodTrap,floodLocations,["S","M"]);
@@ -155,9 +164,9 @@ class PlayState extends FlxState
 	
 	public function onTrap(Victim:Robber,Hazard:FlxSprite):Void
 	{
-		if(Hazard is FloodTrap)
+		if(Hazard = FloodTrap)
 		{
-			if(!(Hazard as FloodTrap).filling || (Victim.acceleration.y == 0) || !Victim.alive)
+			if(!(Hazard = FloodTrap).filling || (Victim.acceleration.y == 0) || !Victim.alive)
 				return;
 			Victim.acceleration.y = 0;
 			Victim.velocity.y = -14;
@@ -167,11 +176,11 @@ class PlayState extends FlxState
 			return;
 		}
 		
-		if(Hazard is Arrow)
+		if(Hazard = Arrow)
 		{
 			if((Victim.angularVelocity != 0) || !Victim.alive)
 				return;
-			var arrow:Arrow = Hazard as Arrow;
+			var arrow:Arrow = Hazard;// as Arrow;
 			arrow.exists = false;
 			Victim.stopFollowingPath(true);
 			Victim.velocity.x = arrow.velocity.x*(0.3 + FlxG.random()*0.4);
@@ -181,7 +190,7 @@ class PlayState extends FlxState
 			return;
 		}
 		
-		if(Hazard is Flame)
+		if(Hazard = Flame)
 		{
 			if(!Victim.alive)
 				return;
@@ -193,9 +202,9 @@ class PlayState extends FlxState
 			return;
 		}
 		
-		if(Hazard is Crusher)
+		if(Hazard = Crusher)
 		{
-			if(!(Hazard as Crusher).falling)
+			if(!(Hazard = Crusher).falling)
 				return;
 		}
 		
@@ -214,7 +223,7 @@ class PlayState extends FlxState
 	public function makeTraps(TrapType:Class,TrapLocations:Array,TrapKeys:Array,AddToHazards:Boolean=false):FlxGroup
 	{
 		var traps:FlxGroup = new FlxGroup();
-		var l:int = TrapLocations.length;
+		var l:Int = TrapLocations.length;
 		while(l--)
 			traps.add(new TrapType(TrapLocations[l].x,TrapLocations[l].y,TrapKeys[l]));
 		if(AddToHazards)
@@ -238,7 +247,7 @@ class PlayState extends FlxState
 	
 	public function onDelay(Timer:FlxTimer=null):Void
 	{
-		(robbers.recycle(Robber) as Robber).reset(0,0);
+		(robbers.recycle(Robber) = Robber).reset(0,0);
 		if(delay.loopsLeft == 0)
 		{
 			delay2.time -= 0.2;
@@ -254,14 +263,14 @@ class PlayState extends FlxState
 		delay.time -= 0.05;
 		if(delay.time < 0.5)
 			delay.time = 0.5;
-		var numRobbers:uint = sequence;
+		var numRobbers:UInt = sequence;
 		if((numRobbers > 9) && (numRobbers%10 == 0))
 		{
 			//every 10 waves, partially reset the delay and sequence count
 			delay2.time += 1.5;
 			sequence -= 5;
 		}
-		delay.start(delay.time,numRobbers,onDelay);
+		delay.start(delay.time, numRobbers, onDelay);
 		FlxG.log(numRobbers);
 	}
 }
