@@ -5,7 +5,7 @@ import flixel.FlxSprite;
 
 class Arrow extends FlxSprite
 {
-	[Embed(source="data/arrow.png")] protected var ImgArrow:Class;
+	[Embed(source="data/arrow.png")] private var ImgArrow:Class;
 	
 	public function Arrow()
 	{
@@ -14,7 +14,7 @@ class Arrow extends FlxSprite
 		elasticity = 0.5;
 	}
 	
-	override public function update():void
+	override public function update():Void
 	{
 		if(!alive)
 		{
@@ -34,7 +34,7 @@ class Arrow extends FlxSprite
 			kill();
 	}
 	
-	override public function kill():void
+	override public function kill():Void
 	{
 		velocity.y = -50-FlxG.random()*50;
 		alive = false;
@@ -44,7 +44,7 @@ class Arrow extends FlxSprite
 		acceleration.y = 500;
 	}
 	
-	override public function reset(X:Number,Y:Number):void
+	override public function reset(X:Number,Y:Number):Void
 	{
 		super.reset(X,Y);
 		angularVelocity = 0;
