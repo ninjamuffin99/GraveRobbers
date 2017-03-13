@@ -45,8 +45,9 @@ class Trap extends FlxSprite
 		super.destroy();
 	}
 	
-	override public function update():void
+	override public function update(elapsed):void
 	{
+		super.update(elapsed:Float);
 		if(FlxG.keys.justPressed(key) && _activeTimer.finished && _reloadTimer.finished)
 			activate();
 	}
