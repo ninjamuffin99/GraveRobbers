@@ -14,8 +14,9 @@ class Arrow extends FlxSprite
 		elasticity = 0.5;
 	}
 	
-	override public function update():Void
+	override public function update(elapsed:Float):Void
 	{
+		super.update(elapsed);
 		if(!alive)
 		{
 			if(justTouched(FLOOR))
