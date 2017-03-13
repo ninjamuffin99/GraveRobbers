@@ -8,7 +8,7 @@ import flixel.FlxPoint;
 	
 class Trap extends FlxSprite
 {
-	static public var changed:Boolean;
+	public static var changed:Boolean;
 	
 	public var key:String;
 	public var activeTime:Float;
