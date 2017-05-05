@@ -9,8 +9,6 @@ import flixel.tile.FlxTilemap;
 
 class Robber extends FlxSprite
 {
-	//[Embed(source="data/dude.png")] protected var ImgDude:Class;
-	
 	public static var changeTracker:UInt;
 	public static var goal:FlxPoint;
 	
@@ -26,7 +24,7 @@ class Robber extends FlxSprite
 	public function Robber()
 	{
 		super(0,0);
-		loadGraphic(ImgDude,true,true,16,24);
+		loadGraphic("assets/images/dude.png", true, 16, 24);
 		width = 12;
 		height = 20;
 		offset.x = 2;
