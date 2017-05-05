@@ -1,15 +1,12 @@
-package
-{
-	import org.flixel.*;
-	[SWF(width="1024", height="768", backgroundColor="#000000")]
-	[Frame(factoryClass="Preloader")]
+package;
+import flixel.FlxGame;
 
-	public class GraveRobbers extends FlxGame
+class GraveRobbers extends FlxGame
+{
+	public function GraveRobbers()
 	{
-		public function GraveRobbers()
-		{
-			super(1024,768,PlayState,1,60,30);
-			forceDebugger = true;
-		}
+		super(1024, 768, PlayState, 1, 60, 30);
+		forceDebugger = true;
 	}
 }
+

@@ -24,7 +24,7 @@ class MenuState extends FlxState
     {
         super.update(elapsed);
 		
-		if(FlxG.mouse.justPressed)
+		if (FlxG.mouse.justPressed)
 		{
 			FlxG.mouse.visible = false;
 			FlxG.switchState(new PlayState());
